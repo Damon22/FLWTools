@@ -12,7 +12,7 @@
 
 
 + (void)writePngFramePath:(NSString *)pathA toPath:(NSString *)pathB{
-
+    
     NSFileManager *manager = [NSFileManager defaultManager];
     
     NSString *path1 = [NSString stringWithFormat:@"%@/",pathA];
@@ -40,18 +40,20 @@
         
         name = [name stringByAppendingString:lastStr];
         
+        name = [name stringByReplacingOccurrencesOfString:@"@1x" withString:@""];
+        
         NSLog(@"name = %@",name);
         
         //拿去照片数据
         NSData *data = [manager contentsAtPath:[path1 stringByAppendingString:obj]];
-
+        
         NSString *path = [path2 stringByAppendingPathComponent:name];
         
         //写入目标文件
         [data writeToFile:path atomically:YES];
     }];
     
-
+    
 }
 
 
